@@ -13,12 +13,13 @@
     "adr": "^1.5.2",
     "next": "15.2.0",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "voyageai": "^0.0.4"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3.3.0",
     "@tailwindcss/postcss": "^4.0.9",
-    "@types/node": "^20.17.22",
+    "@types/node": "^20.17.23",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
     "eslint": "^9.21.0",
