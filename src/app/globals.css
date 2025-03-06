@@ -1,17 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --font-sans: var(--font-open-sans);
-  --font-mono: var(--font-oxygen-mono);
+  --font-sans: "Open Sans", Helvetica, sans-serif;
+  --font-mono: "Oxygen Mono", monospace;
 }
 
 :root {
   --color-primary: #383d3b;
-  --color-secondary: #6883ba;
-  --color-tertiary: #058c42;
+  --color-secondary: #004ead;
+  --color-tertiary: #ff5c00;
   --color-white: #ededed;
-  --background: var(--color-primary);
-  --foreground: var(--color-white);
 }
 
 @media (prefers-color-scheme: light) {
@@ -22,7 +20,7 @@
 }
 
 body {
-  color: var(--foreground);
-  background: var(--background);
-  font-family: "Open Sans", Helvetica, sans-serif;
+  color: var(--color-white);
+  background: var(--color-primary);
+  font-family: var(--font-sans);
 }
