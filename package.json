@@ -12,6 +12,7 @@
     "@anthropic-ai/sdk": "^0.39.0",
     "adr": "^1.5.2",
     "next": "15.2.0",
+    "octokit": "^4.1.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "voyageai": "^0.0.4"

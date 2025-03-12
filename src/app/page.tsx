@@ -1,4 +1,7 @@
-const Home = () => {
+import { getRepo } from "./utils/actions";
+
+const Home = async () => {
+  const repo = await getRepo();
   return (
     <main className="min-h-screen p-8">
       <section className="max-w-2xl mx-auto">
@@ -32,7 +35,7 @@ const Home = () => {
       <section className="max-w-2xl mx-auto mt-8">
         <h2 className="text-2xl font-bold mb-4">Output</h2>
         <div>
-          <p className="font-mono">Output will appear here</p>
+          <p className="font-mono">{repo.map((file: { name: string }) => file.name)}</p>
         </div>
       </section>
     </main>
