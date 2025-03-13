@@ -10,3 +10,12 @@ export const getRepo = async () => {
   });
   return response.data;
 };
+
+export const getPullRequests = async () => {
+  const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
+  const response = await octokit.request("GET /repos/{owner}/{repo}/pulls", {
+    owner: "moexu13",
+    repo: "moe",
+  });
+  return response.data;
+};

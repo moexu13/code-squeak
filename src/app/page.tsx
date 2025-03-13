@@ -1,7 +1,7 @@
-import { getRepo } from "./utils/actions";
+import { getPullRequests } from "./utils/actions";
 
 const Home = async () => {
-  const repo = await getRepo();
+  const pullRequests = await getPullRequests();
   return (
     <main className="min-h-screen p-8">
       <section className="max-w-2xl mx-auto">
@@ -35,7 +35,7 @@ const Home = async () => {
       <section className="max-w-2xl mx-auto mt-8">
         <h2 className="text-2xl font-bold mb-4">Output</h2>
         <div>
-          <p className="font-mono">{repo.map((file: { name: string }) => file.name)}</p>
+          <p className="font-mono">{pullRequests.map((pr: { title: string }) => pr.title)}</p>
         </div>
       </section>
     </main>
