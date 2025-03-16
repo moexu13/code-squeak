@@ -1,42 +1,25 @@
-import { getPullRequests } from "./utils/actions";
-
+import Image from "next/image";
+import { listRepos } from "./utils/actions";
+import PullRequestForm from "./components/PullRequestForm";
 const Home = async () => {
-  const pullRequests = await getPullRequests();
+  const repos = await listRepos();
+
   return (
     <main className="min-h-screen p-8">
       <section className="max-w-2xl mx-auto">
-        <h1 className="text-3xl font-bold mb-6">CodeSqueak</h1>
-        
-        <form className="space-y-4">
-          <div>
-            <label 
-              htmlFor="message" 
-              className="block text-sm font-medium mb-2"
-            >
-              Your Code
-            </label>
-            <textarea
-              id="code-snippet"
-              name="code-snippet"
-              rows={4}
-              className="w-full p-2 border rounded-md font-mono"
-              placeholder="Enter your code snippet here..."
-            />
-          </div>
-          
-          <button
-            type="submit"
-            className="px-4 py-2 bg-(--color-secondary) text-white rounded-md hover:bg-(--color-tertiary)"
-          >
-            Submit
-          </button>
-        </form>
-      </section>
-      <section className="max-w-2xl mx-auto mt-8">
-        <h2 className="text-2xl font-bold mb-4">Output</h2>
-        <div>
-          <p className="font-mono">{pullRequests.map((pr: { title: string }) => pr.title)}</p>
+        <div className="flex items-center mb-2">
+          <Image
+            src="/squeak.png"
+            alt="Line drawing of a cute cartoon rat"
+            width={100}
+            height={100}
+          />
+          <h1 className="text-3xl font-bold">CodeSqueak</h1>
         </div>
+        <p className="mb-2">
+          GitHub Repository Owner - <span className="font-mono">moexu13</span>
+        </p>
+        <PullRequestForm initialRepos={repos} />
       </section>
     </main>
   );
