@@ -10,7 +10,7 @@ type PullRequest = components["schemas"]["pull-request"];
 
 const SubmitButton = () => {
   const { pending } = useFormStatus();
-  
+
   return (
     <button
       type="submit"
@@ -20,7 +20,7 @@ const SubmitButton = () => {
       {pending ? "Loading..." : "Get Pull Requests"}
     </button>
   );
-}
+};
 
 const PullRequestForm = ({ initialRepos }: { initialRepos: Repo[] }) => {
   const [selectedRepo, setSelectedRepo] = useState(initialRepos[0]?.name || "");
@@ -32,7 +32,7 @@ const PullRequestForm = ({ initialRepos }: { initialRepos: Repo[] }) => {
     event.preventDefault();
     setLoading(true);
     setError(null);
-    
+
     try {
       const formData = new FormData();
       formData.append("repos", selectedRepo);
@@ -43,16 +43,19 @@ const PullRequestForm = ({ initialRepos }: { initialRepos: Repo[] }) => {
     } finally {
       setLoading(false);
     }
-  }
+  };
 
   return (
     <>
       <form className="space-y-4" onSubmit={handleSubmit}>
-        <select 
-          className="w-full p-2 border rounded-md" 
+        <select
+          className="w-full p-2 border rounded-md"
           name="repos"
           value={selectedRepo}
-          onChange={(e) => setSelectedRepo(e.target.value)}
+          onChange={(e) => {
+            setSelectedRepo(e.target.value);
+            setPullRequests([]);
+          }}
         >
           {initialRepos.map((repo) => (
             <option key={repo.id} value={repo.name}>
@@ -60,7 +63,7 @@ const PullRequestForm = ({ initialRepos }: { initialRepos: Repo[] }) => {
             </option>
           ))}
         </select>
-        
+
         <button
           type="submit"
           className="px-4 py-2 bg-(--color-secondary) text-white rounded-md hover:bg-(--color-tertiary)"
@@ -92,15 +95,13 @@ const PullRequestForm = ({ initialRepos }: { initialRepos: Repo[] }) => {
           </ul>
         </section>
       )}
-      
+
       {pullRequests.length === 0 && selectedRepo && !loading && (
         <p className="mt-4">No open pull requests found for {selectedRepo}</p>
       )}
-      
+
       {/* TODO: fix accessibility */}
-      {error && (
-        <p className="mt-4 text-red-500">{error}</p>
-      )}
+      {error && <p className="mt-4 text-red-500">{error}</p>}
     </>
   );
 };
