@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useFormStatus } from "react-dom";
 import { getPullRequests } from "../utils/actions";
 import type { components } from "@octokit/openapi-types";
-
+import PullRequestDetail from "./PullRequestDetail";
 type Repo = components["schemas"]["repository"];
 type PullRequest = components["schemas"]["pull-request"];
 
@@ -76,21 +76,9 @@ const PullRequestForm = ({ initialRepos }: { initialRepos: Repo[] }) => {
       {pullRequests.length > 0 && (
         <section className="mt-8">
           <h2 className="text-xl font-bold mb-4">Pull Requests for {selectedRepo}</h2>
-          <ul className="space-y-2">
-            {pullRequests.map((pr) => (
-              <li key={pr.id} className="p-3 border rounded-md">
-                <a
-                  href={pr.html_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-medium hover:underline"
-                >
-                  {pr.title}
-                </a>
-                <p className="text-sm text-gray-400">
-                  #{pr.number} opened by {pr.user?.login}
-                </p>
-              </li>
+          <ul>
+            {pullRequests.map((pullRequest) => (
+              <PullRequestDetail key={pullRequest.id} pullRequest={pullRequest} />
             ))}
           </ul>
         </section>
