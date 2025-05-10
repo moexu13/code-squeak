@@ -29,19 +29,17 @@ export const getPullRequests = async (formData: FormData) => {
   const repo = formData.get("repos") as string;
   const page = parseInt(formData.get("page") as string) || 1;
 
-  // Use the search API to get total count and PRs
-  const response = await octokit.request("GET /search/issues", {
-    q: `repo:moexu13/${repo} is:pr is:open`,
+  const response = await octokit.request("GET /repos/{owner}/{repo}/pulls", {
+    owner: "moexu13",
+    repo: repo,
+    state: "open",
     per_page: 10,
     page: page,
-    headers: {
-      Accept: "application/vnd.github.v3+json",
-    },
   });
 
   // Get detailed info for each PR
   const prsWithDetails = await Promise.all(
-    response.data.items.map(async (pr: any) => {
+    response.data.map(async (pr: PullRequest) => {
       const details = await octokit.request("GET /repos/{owner}/{repo}/pulls/{pull_number}", {
         owner: "moexu13",
         repo: repo,
@@ -53,8 +51,8 @@ export const getPullRequests = async (formData: FormData) => {
 
   return {
     pullRequests: prsWithDetails,
-    totalCount: response.data.total_count,
+    totalCount: response.data.length, // We'll use the length of the current page
     currentPage: page,
-    hasNextPage: response.data.items.length === 10,
+    hasNextPage: response.data.length === 10,
   };
 };
