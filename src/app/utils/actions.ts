@@ -27,15 +27,14 @@ export const getRepo = async () => {
 export const getPullRequests = async (formData: FormData) => {
   const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
   const repo = formData.get("repos") as string;
+  const page = parseInt(formData.get("page") as string) || 1;
 
   const response = await octokit.request("GET /repos/{owner}/{repo}/pulls", {
     owner: "moexu13",
     repo: repo,
     state: "open",
-    per_page: 20,
-    headers: {
-      Accept: "application/vnd.github.v3+json,application/vnd.github.diff-preview+json",
-    },
+    per_page: 10,
+    page: page,
   });
 
   // Get detailed info for each PR
@@ -50,5 +49,10 @@ export const getPullRequests = async (formData: FormData) => {
     })
   );
 
-  return prsWithDetails;
+  return {
+    pullRequests: prsWithDetails,
+    totalCount: response.data.length, // We'll use the length of the current page
+    currentPage: page,
+    hasNextPage: response.data.length === 10,
+  };
 };

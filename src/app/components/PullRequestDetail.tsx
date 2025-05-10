@@ -1,5 +1,6 @@
 import type { components } from "@octokit/openapi-types";
 import Link from "next/link";
+import ReactMarkdown from "react-markdown";
 
 type PullRequest = components["schemas"]["pull-request"];
 
@@ -21,7 +22,9 @@ const PullRequest = ({ pullRequest }: { pullRequest: PullRequest }) => {
           #{pullRequest.number} opened by {pullRequest.user?.login} • {pullRequest.comments}{" "}
           comments • {pullRequest.additions ?? 0}+ {pullRequest.deletions ?? 0}-
         </p>
-        <p className="text-sm text-gray-100">{pullRequest.body?.slice(0, 150)}...</p>
+        <div className="text-sm text-gray-100 prose prose-invert max-w-none">
+          <ReactMarkdown>{pullRequest.body?.slice(0, 150) + "..."}</ReactMarkdown>
+        </div>
         <div className="text-xs text-gray-300">
           Created: {new Date(pullRequest.created_at).toLocaleDateString()} • Updated:{" "}
           {new Date(pullRequest.updated_at).toLocaleDateString()}
