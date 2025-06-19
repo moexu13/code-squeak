@@ -23,7 +23,7 @@ const PullRequest = ({ pullRequest }: { pullRequest: PullRequest }) => {
           comments • {pullRequest.additions ?? 0}+ {pullRequest.deletions ?? 0}-
         </p>
         <div className="text-sm text-gray-100 prose prose-invert max-w-none">
-          <ReactMarkdown>{pullRequest.body?.slice(0, 150) + "..."}</ReactMarkdown>
+          {(ReactMarkdown as any)({ children: pullRequest.body?.slice(0, 150) + "..." })}
         </div>
         <div className="text-xs text-gray-300">
           Created: {new Date(pullRequest.created_at).toLocaleDateString()} • Updated:{" "}
