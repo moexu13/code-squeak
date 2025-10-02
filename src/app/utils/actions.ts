@@ -39,7 +39,7 @@ export const getPullRequests = async (formData: FormData) => {
 
   // Get detailed info for each PR
   const prsWithDetails = await Promise.all(
-    response.data.map(async (pr: PullRequest) => {
+    response.data.map(async (pr) => {
       const details = await octokit.request("GET /repos/{owner}/{repo}/pulls/{pull_number}", {
         owner: "moexu13",
         repo: repo,

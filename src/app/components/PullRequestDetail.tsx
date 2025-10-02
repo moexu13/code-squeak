@@ -3,7 +3,6 @@ import Link from "next/link";
 import ReactMarkdown from "react-markdown";
 
 type PullRequest = components["schemas"]["pull-request"];
-
 const PullRequest = ({ pullRequest }: { pullRequest: PullRequest }) => {
   console.log("Pull Request Data:", pullRequest);
 
