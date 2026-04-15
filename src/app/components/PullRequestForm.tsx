@@ -31,7 +31,7 @@ const PullRequestForm = ({ initialRepos }: { initialRepos: Repo[] }) => {
       setTotalCount(result.totalCount);
       setCurrentPage(result.currentPage);
       setHasNextPage(result.hasNextPage);
-    } catch (err) {
+    } catch {
       setError("Failed to fetch pull requests");
     } finally {
       setLoading(false);

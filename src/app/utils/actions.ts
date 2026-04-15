@@ -1,8 +1,6 @@
 "use server";
 
 import { Octokit } from "octokit";
-import type { components } from "@octokit/openapi-types";
-type PullRequest = components["schemas"]["pull-request"];
 
 export const listRepos = async () => {
   const octokit = new Octokit({ auth: process.env.GITHUB_TOKEN });
